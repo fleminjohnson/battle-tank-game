@@ -32,4 +32,12 @@ public class TankView : MonoBehaviour
             }
         }
     }
+
+    public void RandomSpawning()
+    {
+        Vector3 pos = transform.position;
+        float xPos;
+        xPos = Random.Range(-15f, 15f);
+        transform.position = new Vector3(xPos, pos.y, pos.z);
+    }
 }
