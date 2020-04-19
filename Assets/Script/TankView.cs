@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class TankView : MonoBehaviour
 {
-    public MeshRenderer mesh;
+    public MeshRenderer[] mesh;
+    public Material tankMaterialRed;
+    public Material tankMaterialGreen;
+    public Material tankMaterialBlue;
 
     private void Awake()
     {
@@ -13,17 +16,20 @@ public class TankView : MonoBehaviour
     }
     public void ColorSelector(TankColor color)
     {
-        switch (color)
+        for (int index = 0; index < 4; index++)
         {
-            case TankColor.Blue:
-                mesh.sharedMaterial.color = Color.blue;
-                break;
-            case TankColor.GREEN:
-                mesh.sharedMaterial.color = Color.green;
-                break;
-            case TankColor.RED:
-                mesh.sharedMaterial.color = Color.red;
-                break;
+            switch (color)
+            {
+                case TankColor.BLUE:
+                    mesh[index].material = tankMaterialBlue;
+                    break;
+                case TankColor.GREEN:
+                    mesh[index].material = tankMaterialGreen;
+                    break;
+                case TankColor.RED:
+                    mesh[index].material = tankMaterialRed;
+                    break;
+            }
         }
     }
 }
