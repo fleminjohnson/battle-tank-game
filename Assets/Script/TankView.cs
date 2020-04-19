@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class TankView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public MeshRenderer mesh;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        //mesh = GetComponent<MeshRenderer>();  
+        //ColorSelector(TankColor.Blue);
+    }
+    public void ColorSelector(TankColor color)
+    {
+        switch (color)
+        {
+            case TankColor.Blue:
+                mesh.sharedMaterial.color = Color.blue;
+                break;
+            case TankColor.GREEN:
+                mesh.sharedMaterial.color = Color.green;
+                break;
+            case TankColor.RED:
+                mesh.sharedMaterial.color = Color.red;
+                break;
+        }
     }
 }

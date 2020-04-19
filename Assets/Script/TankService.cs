@@ -14,7 +14,7 @@ public class TankService : SingletonBehaviour<TankService>
 
     public TankView tankView;
 
-    void Start()
+    void Update()
 
     {
 
@@ -28,11 +28,25 @@ public class TankService : SingletonBehaviour<TankService>
 
     {
 
-        for (int i = 0; i < 5; i++)
+        if(Input.GetKeyDown(KeyCode.Keypad0))
 
         {
 
-            CreateNewObject();
+            CreateNewObject(TankColor.RED);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+
+        {
+
+            CreateNewObject(TankColor.GREEN);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+
+        {
+
+            CreateNewObject(TankColor.BLUE);
 
         }
 
@@ -40,12 +54,12 @@ public class TankService : SingletonBehaviour<TankService>
 
 
 
-    private void CreateNewObject()
+    private void CreateNewObject(TankColor color)
 
     {
 
         TankModel tankModel = new TankModel(4, 600);
-
+        tankView.ColorSelector(color);
         TankController tankController = new TankController(tankModel, tankView);
 
     }

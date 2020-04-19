@@ -16,9 +16,7 @@ public class TankController
     {
 
         Debug.Log("New Object created", tankView);
-
         TankModel = tankModel;
-
         TankView = GameObject.Instantiate<TankView>(tankView);
 
     }

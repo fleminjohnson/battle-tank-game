@@ -2,5 +2,5 @@
 {
     RED = 1,
     GREEN = 2,
-    Blue = 3
+    BLUE = 3
 }
