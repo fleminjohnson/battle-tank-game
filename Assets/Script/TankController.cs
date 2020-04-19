@@ -15,7 +15,24 @@ public class TankController
         TankModel = tankModel;
         TankView = GameObject.Instantiate<TankView>(tankView);
         tankView.RandomSpawning();
-
+    }
+    public static void MovementDirector(TankDirection tankDirection)
+    {
+        switch (tankDirection)
+        {
+            case TankDirection.FRONT:
+                TankView.Movement(TankDirection.FRONT);
+                break;
+            case TankDirection.BACK:
+                TankView.Movement(TankDirection.BACK);
+                break;
+            case TankDirection.LEFT:
+                TankView.Movement(TankDirection.LEFT);
+                break;
+            case TankDirection.RIGHT:
+                TankView.Movement(TankDirection.RIGHT);
+                break;
+        }
     }
 
 

@@ -9,10 +9,25 @@ public class TankView : MonoBehaviour
     public Material tankMaterialGreen;
     public Material tankMaterialBlue;
 
-    private void Awake()
+
+    private void Update()
     {
-        //mesh = GetComponent<MeshRenderer>();  
-        //ColorSelector(TankColor.Blue);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            TankController.MovementDirector(TankDirection.FRONT);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            TankController.MovementDirector(TankDirection.BACK);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            TankController.MovementDirector(TankDirection.RIGHT);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            TankController.MovementDirector(TankDirection.LEFT);
+        }
     }
     public void ColorSelector(TankColor color)
     {
@@ -39,5 +54,10 @@ public class TankView : MonoBehaviour
         float xPos;
         xPos = Random.Range(-15f, 15f);
         transform.position = new Vector3(xPos, pos.y, pos.z);
+    }
+
+    public static void Movement(TankDirection tankDirection)
+    {
+
     }
 }
