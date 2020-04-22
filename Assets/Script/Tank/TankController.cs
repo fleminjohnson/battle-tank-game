@@ -35,9 +35,9 @@ public class TankController
             TankView.Movement(TankDirection.LEFT, TankModel.Speed);
         }
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            tankService.BulletRequest(TankView.Position) ;
+            tankService.BulletRequest(TankView.Position);
         }
     }
 

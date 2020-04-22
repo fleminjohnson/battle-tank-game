@@ -15,7 +15,8 @@ public class BulletView : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        bulletcontroller.ControllerInitialization();   
+        //rb.velocity = Vector3.left * 500.0f;
+        Fire(5.0f);
     }
 
     public void Fire(float speed)

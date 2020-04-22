@@ -72,6 +72,18 @@ public class TankView : MonoBehaviour
                 Right(speed);
                 break;
         }
+        //Vertical();
+        //Horizontal();
+    }
+
+    public void Horizontal()
+    {
+        rb.velocity = new Vector3(transform.position.x * Input.GetAxis("Vertical"),0.0f,0.0f);
+    }
+
+    public void Vertical()
+    {
+        rb.velocity = Vector3.right * Input.GetAxis("Vertical") * 5.0f;
     }
 
     public void Initialize(TankController controller)
