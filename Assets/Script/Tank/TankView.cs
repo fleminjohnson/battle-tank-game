@@ -65,7 +65,8 @@ public class TankView : MonoBehaviour
     {
         rb.velocity = transform.forward * Input.GetAxis("Vertical") * speed;
         rb.angularVelocity = Vector3.up * Input.GetAxis("Horizontal") * sensitivity;
-        //new Vector3(0f, Input.GetAxis("Horizontal"), 0f)
+        //rb.AddForce(transform.forward * Input.GetAxis("Vertical") * speed, ForceMode.VelocityChange);
+        //rb.AddTorque(Vector3.up * Input.GetAxis("Horizontal") * sensitivity, ForceMode.VelocityChange);
     }
 
     public void Initialize(TankController controller)

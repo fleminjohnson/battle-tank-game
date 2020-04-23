@@ -12,9 +12,21 @@ public class BulletService : SingletonBehaviour<BulletService>
     {
         //CreateBullet();
     }
-    public BulletController CreateBullet(Transform position)
+    public BulletController CreateBullet(Transform position, BulletVariants bulletVariants)
     {
-        BulletModel bulletModel = new BulletModel(5f, position);
+        BulletModel bulletModel = new BulletModel(5f, position, 10);
+        switch (bulletVariants)
+        {
+            case BulletVariants.WEAK:
+                bulletModel = new BulletModel(5f, position, 10);
+                break;
+            case BulletVariants.MEDIUM:
+                bulletModel = new BulletModel(5f, position, 20);
+                break;
+            case BulletVariants.STRONG:
+                bulletModel = new BulletModel(5f, position, 30);
+                break;
+        }
         BulletController bulletController = new BulletController(bulletModel, bulletView);
         return bulletController;
     }

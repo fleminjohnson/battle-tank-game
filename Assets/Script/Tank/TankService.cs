@@ -28,29 +28,31 @@ public class TankService : SingletonBehaviour<TankService>
     {
         if(Input.GetKeyDown(KeyCode.Keypad0))
         {
-            CreateNewObject(TankColor.RED);
+            CreateNewObject(TankColor.RED, 25, 10f, 2f);
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            CreateNewObject(TankColor.GREEN);
+            CreateNewObject(TankColor.GREEN, 100, 20f, 1f);
         }
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            CreateNewObject(TankColor.BLUE);
+            CreateNewObject(TankColor.BLUE, 50, 20f, 1f);
         }
     }
 
-    public void BulletRequest(Transform turretPosition)
+    public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
     {
-        bulletService.CreateBullet(turretPosition);
+        bulletService.CreateBullet(turretPosition, bulletVariants);
     }
 
-    private void CreateNewObject(TankColor color)
+    private void CreateNewObject(TankColor color, int health, float force,float torque)
 
     {
-        TankModel tankModel = new TankModel(4, 5, 2);
-        tankViewPrefab.ColorSelector(color);
-        TankController tankController = new TankController(tankModel, tankViewPrefab);
+        TankView tankView;
+        TankModel tankModel = new TankModel(health, force, torque);
+        tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
+        tankView.ColorSelector(color);
+        TankController tankController = new TankController(tankModel, tankView);
         tankController.TankServiceChannelInitiaize(this);
     }
     

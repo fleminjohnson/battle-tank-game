@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class TankModel 
 {
-    public TankModel(int health, float speed, float sensitivity)
+    public TankModel(int health, float force, float torque)
     {
         Health = health;
-        Speed = speed;
-        Sensitivity = sensitivity;
+        Force = force;
+        Torque = torque;
+        Debug.Log("Health is " + Health);
     }
 
     public int Health { get; private set; }
-    public float Speed { get; private set; }
-    public float Sensitivity { get; private set; }
+    public float Force { get; private set; }
+    public float Torque { get; private set; }
 }
+

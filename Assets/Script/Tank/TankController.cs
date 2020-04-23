@@ -12,7 +12,7 @@ public class TankController
     {
         Debug.Log("New Object created", tankView);
         TankModel = tankModel;
-        TankView = GameObject.Instantiate<TankView>(tankView);
+        TankView = tankView;
         TankView.Initialize(this);
         TankView.RandomSpawning();
     }
@@ -20,9 +20,9 @@ public class TankController
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            tankService.BulletRequest(TankView.TurretPosition);
+            tankService.BulletRequest(TankView.TurretPosition, BulletVariants.WEAK);
         }
-        TankView.RotationAndTranslation(TankModel.Speed,TankModel.Sensitivity);
+        TankView.RotationAndTranslation(TankModel.Force,TankModel.Torque);
     }
 
     public void TankServiceChannelInitiaize(TankService ts)

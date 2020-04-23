@@ -9,3 +9,10 @@ public enum TankDirection
     HORIZONTAL = 1,
     VERTICAL = 2,
 }
+
+public enum BulletVariants
+{
+    WEAK   = 1,
+    MEDIUM = 2,
+    STRONG = 3
+}
