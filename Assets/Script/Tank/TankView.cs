@@ -13,7 +13,6 @@ public class TankView : MonoBehaviour
     public TankController tankController;
     [SerializeField]
     private Transform turretPosition;
-    private Vector3 position;
 
     private void Awake()
     {
@@ -21,11 +20,11 @@ public class TankView : MonoBehaviour
 
     }
 
-    public Vector3 Position {get {return position;}}
+    public Transform TurretPosition { get; private set; }
 
     private void Update()
     {
-        position = turretPosition.transform.position;
+        TurretPosition = turretPosition;
         tankController.MovementDirector();
     }
     public void ColorSelector(TankColor color)
@@ -55,59 +54,22 @@ public class TankView : MonoBehaviour
         transform.position = new Vector3(xPos, pos.y, pos.z);
     }
 
-    public void Movement(TankDirection tankDirection, float speed)
+    public void SurfaceGliding(float speed)
     {
-        switch (tankDirection)
-        {
-            case TankDirection.FRONT:
-                Forward(speed);
-                break;
-            case TankDirection.BACK:
-                BackWard(speed);
-                break;
-            case TankDirection.LEFT:
-                Left(speed);
-                break;
-            case TankDirection.RIGHT:
-                Right(speed);
-                break;
-        }
-        //Vertical();
-        //Horizontal();
+        Vector3 vertical   = transform.forward * Input.GetAxis("Vertical")   * speed;
+        Vector3 horizontal = transform.right   * Input.GetAxis("Horizontal") * speed;
+        rb.velocity = vertical + horizontal;
     }
 
-    public void Horizontal()
+    public void RotationAndTranslation(float speed, float sensitivity)
     {
-        rb.velocity = new Vector3(transform.position.x * Input.GetAxis("Vertical"),0.0f,0.0f);
-    }
-
-    public void Vertical()
-    {
-        rb.velocity = Vector3.right * Input.GetAxis("Vertical") * 5.0f;
+        rb.velocity = transform.forward * Input.GetAxis("Vertical") * speed;
+        rb.angularVelocity = Vector3.up * Input.GetAxis("Horizontal") * sensitivity;
+        //new Vector3(0f, Input.GetAxis("Horizontal"), 0f)
     }
 
     public void Initialize(TankController controller)
     {
         tankController = controller;
-    }
- 
-    private void Right(float speed)
-    {
-        rb.velocity = Vector3.right * speed;
-    }
-
-    private void Left(float speed)
-    {
-        rb.velocity = Vector3.left * speed;
-    }
-
-    private void BackWard(float speed)
-    {
-        rb.velocity = Vector3.back * speed;
-    }
-
-    private void Forward(float speed)
-    {
-        rb.velocity = Vector3.forward * speed;
     }
 }

@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6938ce3c73d9b194b8a5c1e8503cc7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankView: {fileID: -5413687573188296640, guid: 51dad9c2f680ab841831ee2f23c7471b,
+  tankViewPrefab: {fileID: -5413687573188296640, guid: 51dad9c2f680ab841831ee2f23c7471b,
     type: 3}
   bulletService: {fileID: 1077040996}
 --- !u!4 &2059155961

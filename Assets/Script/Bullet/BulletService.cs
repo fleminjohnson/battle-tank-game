@@ -12,10 +12,10 @@ public class BulletService : SingletonBehaviour<BulletService>
     {
         //CreateBullet();
     }
-    public void CreateBullet(Vector3 position)
+    public BulletController CreateBullet(Transform position)
     {
-        BulletModel bulletModel = new BulletModel(5000.0f, position);
+        BulletModel bulletModel = new BulletModel(5f, position);
         BulletController bulletController = new BulletController(bulletModel, bulletView);
+        return bulletController;
     }
-
 }

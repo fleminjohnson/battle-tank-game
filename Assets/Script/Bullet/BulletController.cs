@@ -11,12 +11,12 @@ public class BulletController
 
         BulletView = GameObject.Instantiate<BulletView>(bulletView);
         BulletView.Initialize(this);
-        BulletView.transform.position = BulletModel.Position;
+        BulletView.transform.position = BulletModel.Position.position;
     }
 
     public void ControllerInitialization()
     {
-        BulletView.Fire(BulletModel.BulletSpeed);
+        BulletView.Fire(BulletModel.BulletSpeed, BulletModel.Position);
     }
     public BulletModel BulletModel { get; }
     public BulletView BulletView { get; }

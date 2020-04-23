@@ -6,8 +6,6 @@
 }
 public enum TankDirection
 {
-    LEFT = 1,
-    RIGHT = 2,
-    FRONT = 3,
-    BACK = 4
+    HORIZONTAL = 1,
+    VERTICAL = 2,
 }

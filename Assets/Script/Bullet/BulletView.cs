@@ -15,18 +15,25 @@ public class BulletView : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        //rb.velocity = Vector3.left * 500.0f;
-        Fire(5.0f);
+        bulletcontroller.ControllerInitialization();
+        //Fire(5.0f);
     }
 
-    public void Fire(float speed)
+    public void Fire(float speed, Transform position)
     {
-        rb.AddForce(Vector3.forward * speed,ForceMode.Impulse);
-        print(speed);
+        rb.AddForce(position.forward * speed,ForceMode.Impulse);
     }
 
     public void Initialize(BulletController bulletControl)
     {
         bulletcontroller = bulletControl;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<TankView>() == null)
+        {
+            Destroy(gameObject);
+        }
     }
 }

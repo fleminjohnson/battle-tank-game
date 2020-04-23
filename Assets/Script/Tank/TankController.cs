@@ -18,27 +18,11 @@ public class TankController
     }
     public void MovementDirector()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            TankView.Movement(TankDirection.FRONT, TankModel.Speed);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            TankView.Movement(TankDirection.BACK, TankModel.Speed);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            TankView.Movement(TankDirection.RIGHT, TankModel.Speed);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            TankView.Movement(TankDirection.LEFT, TankModel.Speed);
-        }
-
         if (Input.GetKeyDown(KeyCode.F))
         {
-            tankService.BulletRequest(TankView.Position);
+            tankService.BulletRequest(TankView.TurretPosition);
         }
+        TankView.RotationAndTranslation(TankModel.Speed,TankModel.Sensitivity);
     }
 
     public void TankServiceChannelInitiaize(TankService ts)
