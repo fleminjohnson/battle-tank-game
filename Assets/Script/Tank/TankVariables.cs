@@ -4,6 +4,12 @@
     GREEN = 2,
     BLUE = 3
 }
+public enum EnemyColor
+{
+    GOLDEN = 1,
+    SILVER = 2,
+    YELLOW = 3
+}
 public enum TankDirection
 {
     HORIZONTAL = 1,

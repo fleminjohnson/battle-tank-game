@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController
+namespace Bullet
 {
-    public BulletController(BulletModel bulletModel, BulletView bulletView)
+    public class BulletController
     {
-        BulletModel = bulletModel;
-        BulletView = bulletView;
+        public BulletController(BulletModel bulletModel, BulletView bulletView)
+        {
+            BulletModel = bulletModel;
+            BulletView = bulletView;
 
-        BulletView = GameObject.Instantiate<BulletView>(bulletView);
-        BulletView.Initialize(this);
-        BulletView.transform.position = BulletModel.Position.position;
-    }
+            BulletView = GameObject.Instantiate<BulletView>(bulletView);
+            BulletView.Initialize(this);
+            BulletView.transform.position = BulletModel.Position.position;
+            BulletView.transform.rotation = BulletModel.Position.rotation;
+        }
 
-    public void ControllerInitialization()
-    {
-        BulletView.Fire(BulletModel.BulletSpeed, BulletModel.Position);
+        public void ControllerInitialization()
+        {
+            BulletView.Fire(BulletModel.BulletSpeed, BulletModel.Position);
+        }
+        public BulletModel BulletModel { get; }
+        public BulletView BulletView { get; }
     }
-    public BulletModel BulletModel { get; }
-    public BulletView BulletView { get; }
 }

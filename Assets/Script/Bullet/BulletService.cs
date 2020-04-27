@@ -3,31 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletService : SingletonBehaviour<BulletService>
+namespace Bullet
 {
-    public BulletView bulletView;
-    // Start is called before the first frame update
-
-    public void Start()
+    public class BulletService : SingletonBehaviour<BulletService>
     {
-        //CreateBullet();
-    }
-    public BulletController CreateBullet(Transform position, BulletVariants bulletVariants)
-    {
-        BulletModel bulletModel = new BulletModel(5f, position, 10);
-        switch (bulletVariants)
+        public BulletView bulletView;
+        public BulletScriptableObject[] bulletScriptableObject;
+        public BulletController CreateBullet(Transform position, BulletVariants bulletVariants)
         {
-            case BulletVariants.WEAK:
-                bulletModel = new BulletModel(5f, position, 10);
-                break;
-            case BulletVariants.MEDIUM:
-                bulletModel = new BulletModel(5f, position, 20);
-                break;
-            case BulletVariants.STRONG:
-                bulletModel = new BulletModel(5f, position, 30);
-                break;
+            BulletModel bulletModel = new BulletModel(bulletScriptableObject[0], position);
+            switch (bulletVariants)
+            {
+                case BulletVariants.WEAK:
+                    bulletModel = new BulletModel(bulletScriptableObject[0], position);
+                    break;
+                case BulletVariants.MEDIUM:
+                    bulletModel = new BulletModel(bulletScriptableObject[1], position);
+                    break;
+                case BulletVariants.STRONG:
+                    bulletModel = new BulletModel(bulletScriptableObject[2], position);
+                    break;
+            }
+            BulletController bulletController = new BulletController(bulletModel, bulletView);
+            return bulletController;
         }
-        BulletController bulletController = new BulletController(bulletModel, bulletView);
-        return bulletController;
     }
+
 }

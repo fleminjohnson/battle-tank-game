@@ -1,37 +1,46 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class TankController
+namespace Player
 {
-    TankService tankService;
-    public TankController(TankModel tankModel, TankView tankView)
+    public class TankController
+    {
+        TankService tankService;
+        public TankController(TankModel tankModel, TankView tankView)
 
-    {
-        Debug.Log("New Object created", tankView);
-        TankModel = tankModel;
-        TankView = tankView;
-        TankView.Initialize(this);
-        TankView.RandomSpawning();
-    }
-    public void MovementDirector()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
         {
-            tankService.BulletRequest(TankView.TurretPosition, BulletVariants.WEAK);
+            //Debug.Log("New Object created", tankView);
+            TankModel = tankModel;
+            TankView = tankView;
+            BulletVariants = tankModel.BulletVariants;
+            TankView.Initialize(this);
+            TankView.RandomSpawning();
         }
-        TankView.RotationAndTranslation(TankModel.Force,TankModel.Torque);
+        public void MovementDirector()
+        {
+            TankView.RotationAndTranslation(TankModel.Force,TankModel.Torque);
+        }
+
+        public void ShootEventInit()
+        {
+            tankService.BulletRequest(TankView.TurretPosition, BulletVariants);
+        }
+
+        public void TankServiceChannelInitiaize(TankService ts)
+        {
+            tankService = ts;
+        }
+
+        public TankModel TankModel { get; }
+
+        public TankView TankView { get; }
+        public BulletVariants BulletVariants { get; }
+
+        public void EnemyHit()
+        {
+            TankView.DestroyGameObject();
+        }
     }
-
-    public void TankServiceChannelInitiaize(TankService ts)
-    {
-        tankService = ts;
-    }
-
-    public TankModel TankModel { get; }
-
-    public TankView TankView { get; }
-
 }

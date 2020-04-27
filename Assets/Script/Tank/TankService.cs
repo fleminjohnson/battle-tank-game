@@ -1,60 +1,65 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Bullet;
 
 
-
-public class TankService : SingletonBehaviour<TankService>
-
+namespace Player
 {
-
-    public TankView tankViewPrefab;
-    public BulletService bulletService;
-    
-
-    void Update()
+    public class TankService : SingletonBehaviour<TankService>
 
     {
-        StartGame();
-    }
+
+        public TankView tankViewPrefab;
+        public BulletService bulletService;
+        public TankScriptableObject[] tankConfigurations;
 
 
+        void Update()
 
-    private void StartGame()
-
-    {
-        if(Input.GetKeyDown(KeyCode.Keypad0))
         {
-            CreateNewObject(TankColor.RED, 25, 10f, 2f);
+            StartGame();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+
+
+
+        private void StartGame()
+
         {
-            CreateNewObject(TankColor.GREEN, 100, 20f, 1f);
+            if (Input.GetKeyDown(KeyCode.Keypad0))
+            {
+                CreateNewObject(tankConfigurations[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                CreateNewObject(tankConfigurations[1]);
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                CreateNewObject(tankConfigurations[2]);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+
+        public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
         {
-            CreateNewObject(TankColor.BLUE, 50, 20f, 1f);
+            bulletService.CreateBullet(turretPosition, bulletVariants);
         }
+
+        private void CreateNewObject(TankScriptableObject tankScriptableObject)
+
+        {
+            TankView tankView;
+            TankModel tankModel = new TankModel(tankScriptableObject.health,
+                                               tankScriptableObject.force,
+                                     tankScriptableObject.torque, tankScriptableObject.bulletVariants);
+
+            tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
+            tankView.ColorSelector(tankScriptableObject.tankColor);
+            TankController tankController = new TankController(tankModel, tankView);
+            tankController.TankServiceChannelInitiaize(this);
+        }
+
+
     }
-
-    public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
-    {
-        bulletService.CreateBullet(turretPosition, bulletVariants);
-    }
-
-    private void CreateNewObject(TankColor color, int health, float force,float torque)
-
-    {
-        TankView tankView;
-        TankModel tankModel = new TankModel(health, force, torque);
-        tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
-        tankView.ColorSelector(color);
-        TankController tankController = new TankController(tankModel, tankView);
-        tankController.TankServiceChannelInitiaize(this);
-    }
-    
-
 }
