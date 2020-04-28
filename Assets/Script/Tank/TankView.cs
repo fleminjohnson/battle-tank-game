@@ -31,11 +31,11 @@ namespace Player
         }
         private void Update()
         {
-            tankController.MovementDirector();
             if (Input.GetKeyDown(KeyCode.F))
             {
                 tankController.ShootEventInit();
             }
+            tankController.MovementDirector();
         }
         public void ColorSelector(TankColor color)
         {

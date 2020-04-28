@@ -27,14 +27,6 @@ namespace Player
         private void StartGame()
 
         {
-            if (Input.GetKeyDown(KeyCode.Keypad0))
-            {
-                CreateNewObject(tankConfigurations[0]);
-            }
-            if (Input.GetKeyDown(KeyCode.Keypad1))
-            {
-                CreateNewObject(tankConfigurations[1]);
-            }
             if (Input.GetKeyDown(KeyCode.Keypad2))
             {
                 CreateNewObject(tankConfigurations[2]);
