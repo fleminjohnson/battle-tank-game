@@ -7,7 +7,6 @@ namespace Player
 {
     public class TankController
     {
-        TankService tankService;
         public TankController(TankModel tankModel, TankView tankView)
 
         {
@@ -25,12 +24,7 @@ namespace Player
 
         public void ShootEventInit()
         {
-            tankService.BulletRequest(TankView.TurretPosition, BulletVariants);
-        }
-
-        public void TankServiceChannelInitiaize(TankService ts)
-        {
-            tankService = ts;
+            TankService.Instance.BulletRequest(TankView.TurretPosition, BulletVariants);
         }
 
         public TankModel TankModel { get; }

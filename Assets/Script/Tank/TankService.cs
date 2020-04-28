@@ -49,7 +49,6 @@ namespace Player
             tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
             tankView.ColorSelector(tankScriptableObject.tankColor);
             TankController tankController = new TankController(tankModel, tankView);
-            tankController.TankServiceChannelInitiaize(this);
         }
 
 
