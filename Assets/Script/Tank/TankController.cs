@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Particles;
 
 namespace Player
 {
@@ -10,7 +11,6 @@ namespace Player
         public TankController(TankModel tankModel, TankView tankView)
 
         {
-            //Debug.Log("New Object created", tankView);
             TankModel = tankModel;
             TankView = tankView;
             BulletVariants = tankModel.BulletVariants;
@@ -32,9 +32,10 @@ namespace Player
         public TankView TankView { get; }
         public BulletVariants BulletVariants { get; }
 
-        public void EnemyHit()
+        public void EnemyHit(Vector3 position)
         {
-            TankView.DestroyGameObject();
+            TankView.DestroyTank();
+            TankService.Instance.TankDestroyed(position);
         }
     }
 }

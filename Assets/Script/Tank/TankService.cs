@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bullet;
+using Particles;
 
 
 namespace Player
@@ -16,7 +17,7 @@ namespace Player
         public TankScriptableObject[] tankConfigurations;
 
 
-        void Update()
+        void Start()
 
         {
             StartGame();
@@ -24,13 +25,10 @@ namespace Player
 
 
 
-        private void StartGame()
+        public void StartGame()
 
         {
-            if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                CreateNewObject(tankConfigurations[2]);
-            }
+            CreateNewObject(tankConfigurations[2]);
         }
 
         public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
@@ -51,6 +49,9 @@ namespace Player
             TankController tankController = new TankController(tankModel, tankView);
         }
 
-
+        public void TankDestroyed(Vector3 position)
+        {
+            ParticleServices.Instance.InitializeSmoke(position);      
+        }
     }
 }

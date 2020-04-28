@@ -56,7 +56,7 @@ namespace Player
             }
         }
 
-        internal void DestroyGameObject()
+        public void DestroyTank()
         {
             Destroy(gameObject);
         }
@@ -93,7 +93,7 @@ namespace Player
         {
             if (collision.collider.GetComponent<EnemyView>())
             {
-                tankController.EnemyHit();
+                tankController.EnemyHit(transform.position);
             }
         }
     }
