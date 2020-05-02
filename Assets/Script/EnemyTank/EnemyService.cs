@@ -19,7 +19,7 @@ namespace Enemy
 
         private void StartGame()
         {
-            enemyConfig = enemyList.enemy[UnityEngine.Random.Range(0, enemyList.enemy.Length)];
+            enemyConfig = enemyList.enemy[0];
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 CreateEnemy();
@@ -38,7 +38,7 @@ namespace Enemy
             EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel);
         }
 
-        private void ApplyMaterial(EnemyColor tankColor, EnemyView enemyView)
+        public void ApplyMaterial(EnemyColor tankColor, EnemyView enemyView)
         {
             Material material = null;
             switch (tankColor)

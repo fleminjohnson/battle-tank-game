@@ -112,6 +112,10 @@ namespace Player
             }
         }
 
+        public void ChangeColor(Color color)
+        {
+            selfMat.color = color;       
+        }
         public void ChangeState(TankState newTankState)
         {
             if (currentState != null)
