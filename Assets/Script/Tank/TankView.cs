@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using Tank.State;
 
 
 namespace Player
@@ -17,10 +18,22 @@ namespace Player
         public TankController tankController;
         [SerializeField]
         private Transform turretPosition;
+        [SerializeField]
+        public TankPatrolling patrollingState;
+        [SerializeField]
+        public TankChasing chasingingState;
+        [SerializeField]
+        private TankState initialState;
+
+        private Material selfMat;
+
+        
+        private TankState currentState;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            selfMat = GetComponent<Material>();
         }
 
         public Transform TurretPosition { get; private set; }
@@ -28,6 +41,8 @@ namespace Player
         private void Start()
         {
             TurretPosition = turretPosition;
+            ChangeState(GetComponent<TankPatrolling>());
+
         }
         private void Update()
         {
@@ -95,6 +110,16 @@ namespace Player
             {
                 tankController.EnemyHit(transform.position);
             }
+        }
+
+        public void ChangeState(TankState newTankState)
+        {
+            if (currentState != null)
+            {
+                currentState.OnExitState();
+            }
+            currentState = newTankState;
+            currentState.OnEnterState();
         }
     }
 }

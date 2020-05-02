@@ -9,7 +9,7 @@ public class BulletModel
         BulletSpeed = bulletScriptableObject.bulletSpeed;
         Position = position;
 
-        Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
+        //Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
     }
     public float BulletSpeed { get; }
     public Transform Position { get; }
