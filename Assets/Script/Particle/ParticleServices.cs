@@ -15,10 +15,9 @@ namespace Particles
         public void InitializeSmoke(Vector3 position)
         {
             ParticleView smokeInstance;
-            ParticleModel particleModel = new ParticleModel();
             smokeInstance = GameObject.Instantiate<ParticleView>(particlePrefab);
             smokeInstance.transform.position = position + new Vector3(0f,2.0f,0f);
-            ParticleController particleController = new ParticleController(smokeInstance, particleModel); 
+            ParticleController particleController = new ParticleController(smokeInstance); 
         }
 
         public void PlayerRespawnRequest()

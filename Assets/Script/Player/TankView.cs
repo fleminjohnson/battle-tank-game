@@ -8,7 +8,7 @@ using Tank.State;
 
 namespace Player
 {
-    public class TankView : MonoBehaviour
+    public class TankView : MonoBehaviour,IDamagable
     {
         public MeshRenderer[] mesh;
         public Material tankMaterialRed;
@@ -24,10 +24,7 @@ namespace Player
         public TankChasing chasingingState;
         [SerializeField]
         private TankState initialState;
-
-        private Material selfMat;
-
-        
+        private Material selfMat;    
         private TankState currentState;
 
         private void Awake()
@@ -124,6 +121,16 @@ namespace Player
             }
             currentState = newTankState;
             currentState.OnEnterState();
+        }
+
+        public void GetDamage(int damage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ID ReturnID()
+        {
+            return tankController.TankModel.ID;   
         }
     }
 }

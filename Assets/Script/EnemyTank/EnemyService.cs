@@ -10,7 +10,6 @@ namespace Enemy
         public EnemyView enemyViewPrefab;
         private EnemyScriptableObject enemyConfig;
         public EnemyListScriptableObject enemyList;
-        public Material[] materialName;
 
         private void Update()
         {
@@ -19,7 +18,7 @@ namespace Enemy
 
         private void StartGame()
         {
-            enemyConfig = enemyList.enemy[0];
+            enemyConfig = enemyList.enemy[UnityEngine.Random.Range(0,enemyList.enemy.Length)];
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 CreateEnemy();
@@ -33,30 +32,8 @@ namespace Enemy
                                                   enemyConfig.force,
                                                   enemyConfig.torque,
                                                   enemyConfig.bulletVariants,
-                                                  enemyConfig.enemyColor);
-            ApplyMaterial(enemyConfig.enemyColor, enemyViewInstance);
-            EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel);
-        }
-
-        public void ApplyMaterial(EnemyColor tankColor, EnemyView enemyView)
-        {
-            Material material = null;
-            switch (tankColor)
-            {
-                case EnemyColor.GOLDEN:
-                    material = materialName[0];
-                    break;
-                case EnemyColor.SILVER:
-                    material = materialName[1];
-                    break;
-                case EnemyColor.YELLOW:
-                    material = materialName[2];
-                    break;
-            }
-            for (int i = 0; i < enemyView.transform.GetChild(0).childCount; i++)
-            {
-                enemyView.transform.GetChild(0).GetChild(i).GetComponent<MeshRenderer>().material = material;
-            }
+                                                  enemyConfig.enemyColor, ID.ENEMY);
+            EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
         }
     }
 }

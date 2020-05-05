@@ -9,14 +9,14 @@ namespace Enemy.State
         public override void EnemyEnteringState()
         {
             base.EnemyEnteringState();
-            print("Entering Chasing State");
+            print("Enemy Entering Chasing State");
             enemyView.ColorChange(EnemyColor.GOLDEN);
         }
 
         public override void EnemyExitingState()
         {
             base.EnemyExitingState();
-            print("Exiting Chasing State");
+            print("Enemy Exiting Chasing State");
         }
     }
 }

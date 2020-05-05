@@ -13,13 +13,13 @@ namespace Bullet
 
             BulletView = GameObject.Instantiate<BulletView>(bulletView);
             BulletView.Initialize(this);
-            BulletView.transform.position = BulletModel.Position.position;
-            BulletView.transform.rotation = BulletModel.Position.rotation;
+            BulletView.transform.position = BulletModel.Transform.position;
+            BulletView.transform.rotation = BulletModel.Transform.rotation;
         }
 
-        public void ControllerInitialization()
+        public void FireCommand()
         {
-            BulletView.Fire(BulletModel.BulletSpeed, BulletModel.Position);
+            BulletView.Fire(BulletModel.BulletSpeed, BulletModel.Transform);
         }
         public BulletModel BulletModel { get; }
         public BulletView BulletView { get; }

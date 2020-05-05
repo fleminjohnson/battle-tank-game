@@ -6,10 +6,9 @@ namespace Particles
 {
     public class ParticleController
     {
-        public ParticleController(ParticleView particleView, ParticleModel particleModel)
+        public ParticleController(ParticleView particleView)
         {
             ParticleView = particleView;
-            ParticleModel = particleModel;
             ParticleView.ControllerChannelInitialisation(this);
         }
 
@@ -17,8 +16,6 @@ namespace Particles
         {
             ParticleServices.Instance.PlayerRespawnRequest();
         }
-
         public ParticleView ParticleView { get; private set; }
-        public ParticleModel ParticleModel { get; private set; }
     }
 }

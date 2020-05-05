@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Enemy Weak
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
-  health: 50
-  force: 2
-  torque: 2
-  bulletVariants: 2
-  enemyColor: 3
+  m_Script: {fileID: 11500000, guid: 5787061008830a9448652299f2f2b6b8, type: 3}
+  m_Name: StrongTank
+  m_EditorClassIdentifier: 
+  health: 100
+  force: 10
+  torque: 5
+  bulletVariants: 3
+  tankColor: 1

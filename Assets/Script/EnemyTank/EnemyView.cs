@@ -7,22 +7,18 @@ using Enemy.State;
 
 namespace Enemy
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour,IDamagable
     {
         private EnemyController enemyController;
         private EnemyState currentState;
-
         public EnemyPatrollingState patrollingState;
-
         public EnemyChasingState chasingingState;
+        public EnemyPatrollingState initialState;
+        public Material[] materialName;
 
-        private EnemyPatrollingState initialState;
-        private void OnCollisionEnter(Collision collision)
+        private void Start()
         {
-            if (collision.collider.GetComponent<BulletView>() != null)
-            {
-                enemyController.CollisionOccured();
-            }
+            ChangeState(patrollingState);
         }
 
         public void ControllerChannelInitialisaton(EnemyController enemyController)
@@ -30,25 +26,51 @@ namespace Enemy
             this.enemyController = enemyController;
         }
 
-        public void DestroyGameObject()
+        public void Death()
         {
             Destroy(gameObject);
         }
 
-        public void ColorChange(EnemyColor enemyColorInstance)
+        public void ColorChange(EnemyColor tankColor)
         {
-            EnemyService.Instance.ApplyMaterial(enemyColorInstance,this);
+            Material material = null;
+            switch (tankColor)
+            {
+                case EnemyColor.GOLDEN:
+                    material = materialName[0];
+                    break;
+                case EnemyColor.SILVER:
+                    material = materialName[1];
+                    break;
+                case EnemyColor.YELLOW:
+                    material = materialName[2];
+                    break;
+            }
+            for (int i = 0; i < transform.GetChild(0).childCount; i++)
+            {
+                transform.GetChild(0).GetChild(i).GetComponent<MeshRenderer>().material = material;
+            }
         }
+
 
         public void ChangeState(EnemyState nextState)
         {
-            if(currentState != null)
+            if (currentState != null)
             {
                 currentState.EnemyExitingState();
             }
             currentState = nextState;
             currentState.EnemyEnteringState();
         }
-    }
 
+        public void GetDamage(int damage)
+        {
+            enemyController.Damage(damage);
+        }
+
+        public ID ReturnID()
+        {
+            return enemyController.EnemyModel.ID;   
+        }
+    }
 }

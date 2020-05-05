@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BulletModel
 {
-    public BulletModel(BulletScriptableObject bulletScriptableObject, Transform position)
+    public BulletModel(BulletScriptableObject bulletScriptableObject, Transform transform, ID iD)
     {
         BulletSpeed = bulletScriptableObject.bulletSpeed;
-        Position = position;
+        Transform = transform;
+        ID = iD;
+        BulletDamage = bulletScriptableObject.bulletDamage;
 
-        //Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
+        Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
     }
     public float BulletSpeed { get; }
-    public Transform Position { get; }
+    public Transform Transform { get; }
+    public ID ID { get; }
+    public float BulletDamage { get; }
 }
