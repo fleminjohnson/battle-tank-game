@@ -15,7 +15,12 @@ namespace Enemy
         public EnemyChasingState chasingingState;
         public EnemyPatrollingState initialState;
         public Material[] materialName;
+        private Rigidbody rb;
 
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
         private void Start()
         {
             ChangeState(patrollingState);
@@ -71,6 +76,31 @@ namespace Enemy
         public ID ReturnID()
         {
             return enemyController.EnemyModel.ID;   
+        }
+
+        public void EnemyRotationAndTranslation()
+        {
+            StartCoroutine(EnemyTranslation());
+            StartCoroutine(EnemyRotation());
+        }
+
+        public void EnemyStop()
+        {
+            rb.velocity = new Vector3(0,0,0);
+            rb.angularVelocity = new Vector3(0,0,0);
+        }
+
+        private IEnumerator EnemyTranslation()
+        {
+            rb.velocity = transform.forward * enemyController.EnemyModel.Force;
+            yield return new WaitForSeconds(1.0f);
+        }
+        private IEnumerator EnemyRotation()
+        {
+            yield return EnemyTranslation();
+            rb.angularVelocity = Vector3.up * enemyController.EnemyModel.Torque;
+            yield return new WaitForSeconds(1.0f);
+            EnemyStop();
         }
     }
 }
