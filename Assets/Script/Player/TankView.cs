@@ -33,11 +33,11 @@ namespace Player
             selfMat = GetComponent<Material>();
         }
 
-        public Transform TurretPosition { get; private set; }
+        public Transform enemyTurretPosition { get; private set; }
 
         private void Start()
         {
-            TurretPosition = turretPosition;
+            enemyTurretPosition = turretPosition;
             ChangeState(GetComponent<TankPatrolling>());
 
         }
@@ -125,7 +125,7 @@ namespace Player
 
         public void GetDamage(int damage)
         {
-            throw new NotImplementedException();
+            Destroy(gameObject);
         }
 
         public ID ReturnID()

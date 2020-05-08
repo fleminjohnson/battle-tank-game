@@ -37,6 +37,7 @@ namespace Bullet
             IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
             if (damagable != null)
             {
+                print("This is IDamagable ");
                 if(bulletcontroller.BulletModel.ID != damagable.ReturnID())
                 {
                     damagable.GetDamage((int)bulletcontroller.BulletModel.BulletDamage);

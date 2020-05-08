@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using Player;
 
 namespace Enemy.State
 {
@@ -9,6 +10,7 @@ namespace Enemy.State
     public class EnemyState : MonoBehaviour
     {
         protected EnemyView enemyView;
+        public static TankView player;
 
         private void Awake()
         {

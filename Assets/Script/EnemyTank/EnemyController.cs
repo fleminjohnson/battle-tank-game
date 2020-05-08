@@ -31,5 +31,10 @@ namespace Enemy
             }
             EnemyModel.DecrementHealth(damage) ;
         }
+
+        public void ShootEventInit()
+        {
+            EnemyService.Instance.BulletRequest(EnemyView.enemyTurretPosition, BulletVariants.STRONG);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Enemy.State
 
         private void FixedUpdate()
         {
-            enemyView.EnemyRotationAndTranslation();
+            enemyView.EnemyPatrolling();
         }
 
         public override void EnemyExitingState()
@@ -30,8 +30,12 @@ namespace Enemy.State
 
         private void Update()
         {
-            timeElapsed += Time.deltaTime;
-            if(timeElapsed > 5f)
+            float distance = 50;
+            if (player != null)
+            {
+                distance = Vector3.Distance(player.transform.position, transform.position);
+            }
+            if (distance < 20)
             {
                 enemyView.ChangeState(enemyView.chasingingState);
             }

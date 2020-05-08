@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bullet;
 using Particles;
-
+using Enemy;
+using Enemy.State;
 
 namespace Player
 {
@@ -46,6 +47,9 @@ namespace Player
                                                 tankScriptableObject.bulletVariants, ID.PLAYER);
 
             tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
+
+            EnemyState.player = tankView;
+
             tankView.ColorSelector(tankScriptableObject.tankColor);
             TankController tankController = new TankController(tankModel, tankView);
         }

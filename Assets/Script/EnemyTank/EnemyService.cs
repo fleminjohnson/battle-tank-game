@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bullet;
+using Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ namespace Enemy
         public EnemyView enemyViewPrefab;
         private EnemyScriptableObject enemyConfig;
         public EnemyListScriptableObject enemyList;
+        public Transform spawnTransform1;
+        public Transform spawnTransform2;
 
         private void Update()
         {
@@ -34,6 +38,11 @@ namespace Enemy
                                                   enemyConfig.bulletVariants,
                                                   enemyConfig.enemyColor, ID.ENEMY);
             EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
+        }
+
+        public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
+        {
+            BulletService.Instance.CreateBullet(turretPosition, bulletVariants, ID.ENEMY);
         }
     }
 }
