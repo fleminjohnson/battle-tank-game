@@ -13,7 +13,7 @@ namespace Enemy
             Torque = torque;
             BulletVariants = bulletVariants;
             TankColor = tankColor;
-            Debug.Log("Health is " + Health);
+            //Debug.Log("Health is " + Health);
         }
 
         public int Health { get; private set; }
