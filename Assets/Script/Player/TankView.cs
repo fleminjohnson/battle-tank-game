@@ -103,9 +103,10 @@ namespace Player
 
         private void OnCollisionEnter(Collision collision)
         {
+            int damage = 5;
             if (collision.collider.GetComponent<EnemyView>())
             {
-                tankController.EnemyHit(transform.position);
+                tankController.EnemyHit(transform.position, damage);
             }
         }
 
@@ -125,7 +126,7 @@ namespace Player
 
         public void GetDamage(int damage)
         {
-            Destroy(gameObject);
+            tankController.EnemyHit(transform.position, damage);
         }
 
         public ID ReturnID()

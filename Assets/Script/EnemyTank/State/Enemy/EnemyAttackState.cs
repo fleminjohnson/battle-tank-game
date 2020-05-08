@@ -30,6 +30,14 @@ public class EnemyAttackState : EnemyState
         if(player != null)
         {
             spanningOver = enemyView.EnemyRotation(this.transform, player.transform);
+            if (Vector3.Distance(player.transform.position, transform.position) > 10)
+            {
+                enemyView.ChangeState(enemyView.chasingingState);
+            }
+        }
+        else
+        {
+            enemyView.ChangeState(enemyView.patrollingState);
         }
     }
 }

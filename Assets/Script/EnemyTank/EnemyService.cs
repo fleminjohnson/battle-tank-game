@@ -4,10 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Particles;
 
 namespace Enemy
 {
-    public class EnemyService : SingletonBehaviour<EnemyService>
+    public class EnemyService : SingletonBehaviour<EnemyService>, IServices
     {
         public EnemyView enemyViewPrefab;
         private EnemyScriptableObject enemyConfig;
@@ -40,9 +41,19 @@ namespace Enemy
             EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
         }
 
+        public void EnemyDestroyed(Vector3 position)
+        {
+            ParticleServices.Instance.InitializeSmoke(position,this);
+        }
+
         public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
         {
             BulletService.Instance.CreateBullet(turretPosition, bulletVariants, ID.ENEMY);
+        }
+
+        public void RespawnRequest()
+        {
+            CreateEnemy();
         }
     }
 }

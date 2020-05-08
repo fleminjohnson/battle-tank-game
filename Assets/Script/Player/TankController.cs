@@ -32,10 +32,14 @@ namespace Player
         public TankView TankView { get; }
         public BulletVariants BulletVariants { get; }
 
-        public void EnemyHit(Vector3 position)
+        public void EnemyHit(Vector3 position, int damage)
         {
-            TankView.DestroyTank();
-            TankService.Instance.TankDestroyed(position);
+            if (TankModel.Health - damage < 0)
+            {
+                TankView.DestroyTank();
+                TankService.Instance.TankDestroyed(position);
+            }
+            TankModel.DecrementHealth(damage);
         }
     }
 }

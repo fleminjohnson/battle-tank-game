@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,5 +20,10 @@ public class TankModel
     public float Torque { get; private set; }
     public BulletVariants BulletVariants { get; }
     public ID ID { get; }
+
+    internal void DecrementHealth(int decrementValue)
+    {
+        Health -= decrementValue;
+    }
 }
 

@@ -9,7 +9,7 @@ using Enemy.State;
 
 namespace Player
 {
-    public class TankService : SingletonBehaviour<TankService>
+    public class TankService : SingletonBehaviour<TankService>, IServices
 
     {
 
@@ -56,7 +56,12 @@ namespace Player
 
         public void TankDestroyed(Vector3 position)
         {
-            ParticleServices.Instance.InitializeSmoke(position);      
+            ParticleServices.Instance.InitializeSmoke(position, this);      
+        }
+
+        public void RespawnRequest()
+        {
+            StartGame();
         }
     }
 }

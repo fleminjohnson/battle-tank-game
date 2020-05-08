@@ -18,18 +18,24 @@ namespace Enemy
         public EnemyView EnemyView { get; }
         public EnemyModel EnemyModel { get; private set; }
 
-        public void CollisionOccured()
-        {
-            EnemyView.Death();
-        }
+        //public void CollisionOccured()
+        //{
+        //    EnemyView.Death();
+        //}
 
-        public void Damage(int damage)
+        public void Damage(int damage, Vector3 position)
         {
             if(EnemyModel.Health - damage < 0)
             {
                 EnemyView.Death();
+                EnemyService.Instance.EnemyDestroyed(position);
             }
             EnemyModel.DecrementHealth(damage) ;
+        }
+
+        public void RespawnRequest()
+        {
+            throw new NotImplementedException();
         }
 
         public void ShootEventInit()

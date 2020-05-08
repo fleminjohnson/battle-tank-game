@@ -89,7 +89,7 @@ namespace Enemy
 
         public void GetDamage(int damage)
         {
-            enemyController.Damage(damage);
+            enemyController.Damage(damage, transform.position);
         }
 
         public ID ReturnID()
@@ -175,5 +175,9 @@ namespace Enemy
             enemyController.ShootEventInit();
         }
 
+        public void StartGame()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
