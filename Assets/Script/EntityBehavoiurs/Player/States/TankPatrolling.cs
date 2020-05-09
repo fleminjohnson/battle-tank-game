@@ -10,13 +10,13 @@ public class TankPatrolling : TankState
     {
         base.OnEnterState();
         tankView.ColorSelector(tankColor);
-        print("Entering patrolling State");
+        //print("Entering patrolling State");
     }
 
     public override void OnExitState()
     {
         base.OnExitState();
-        print("Exiting patrolling State");
+        //print("Exiting patrolling State");
     }
 
     private void Update()

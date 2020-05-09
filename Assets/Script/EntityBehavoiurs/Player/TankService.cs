@@ -16,6 +16,7 @@ namespace Player
         public TankView tankViewPrefab;
         public BulletService bulletService;
         public TankScriptableObject[] tankConfigurations;
+        private int playerCount = 0;
 
 
         void Start()
@@ -30,6 +31,7 @@ namespace Player
 
         {
             PlayerInstantiate(tankConfigurations[2]);
+            playerCount += 1;
         }
 
         public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
@@ -58,11 +60,15 @@ namespace Player
         {
             ParticleServices.Instance.InitializeSmoke(position, this);
             EventServices.GenericInstance.InvokeOnplayerDeath();
+            playerCount -= 1;
         }
 
         public void RespawnRequest()
         {
-            StartGame();
+            if(playerCount == 0)
+            {
+                StartGame();
+            }
         }
     }
 }

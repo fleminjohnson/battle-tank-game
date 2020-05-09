@@ -11,7 +11,7 @@ public class BulletModel
         ID = iD;
         BulletDamage = bulletScriptableObject.bulletDamage;
 
-        Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
+        //Debug.Log("Bullet damage is "+ bulletScriptableObject.bulletDamage);
     }
     public float BulletSpeed { get; }
     public Transform Transform { get; }

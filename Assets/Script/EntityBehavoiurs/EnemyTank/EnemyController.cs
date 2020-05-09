@@ -38,12 +38,7 @@ namespace Enemy
                 }
                 EnemyService.Instance.EnemyDestroyed(position);
             }
-            EnemyModel.DecrementHealth(damage) ;
-        }
-
-        public void RespawnRequest()
-        {
-            throw new NotImplementedException();
+            EnemyView.EnemyHealthBarUpdate(EnemyModel.DecrementHealth(damage));
         }
 
         public void ShootEventInit()

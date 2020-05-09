@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class TankModel 
 {
+    private float totalHealth;
     public TankModel(int health, float force, float torque, BulletVariants bulletVariants, ID iD)
     {
+        totalHealth = health;
         Health = health;
         Force = force;
         Torque = torque;
         BulletVariants = bulletVariants;
         ID = iD;
-        //Debug.Log("Health is " + Health);
     }
 
     public int Health { get; private set; }
@@ -21,9 +22,12 @@ public class TankModel
     public BulletVariants BulletVariants { get; }
     public ID ID { get; }
 
-    internal void DecrementHealth(int decrementValue)
+    internal float DecrementHealth(int decrementValue)
     {
         Health -= decrementValue;
+        Debug.Log("Health is " + Health);
+        Debug.Log("Totalhealth is " + totalHealth);
+        return (300/totalHealth);
     }
 }
 

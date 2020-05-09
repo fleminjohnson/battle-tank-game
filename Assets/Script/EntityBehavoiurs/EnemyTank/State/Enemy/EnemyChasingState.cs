@@ -33,7 +33,7 @@ namespace Enemy.State
         public override void EnemyExitingState()
         {
             base.EnemyExitingState();
-            print("Enemy Exiting Chasing State");
+            //print("Enemy Exiting Chasing State");
         }
     }
 }

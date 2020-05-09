@@ -14,8 +14,8 @@ namespace Player
         public Material tankMaterialRed;
         public Material tankMaterialGreen;
         public Material tankMaterialBlue;
-        private Rigidbody rb;
         public TankController tankController;
+
         [SerializeField]
         private Transform turretPosition;
         [SerializeField]
@@ -24,6 +24,11 @@ namespace Player
         public TankChasing chasingingState;
         [SerializeField]
         private TankState initialState;
+        [SerializeField]
+        private Transform HealthBarContainer;
+        private Transform HealthBar;
+
+        private Rigidbody rb;
         private Material selfMat;    
         private TankState currentState;
 
@@ -31,6 +36,7 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
             selfMat = GetComponent<Material>();
+            HealthBar = HealthBarContainer.transform.GetChild(0);
         }
 
         public Transform enemyTurretPosition { get; private set; }
@@ -132,6 +138,12 @@ namespace Player
         public ID ReturnID()
         {
             return tankController.TankModel.ID;   
+        }
+
+        public void HealthBarUpdate(float percentage)
+        {
+            HealthBar.localPosition = HealthBar.localPosition + Vector3.left * percentage;
+            print(HealthBar.localPosition);
         }
     }
 }

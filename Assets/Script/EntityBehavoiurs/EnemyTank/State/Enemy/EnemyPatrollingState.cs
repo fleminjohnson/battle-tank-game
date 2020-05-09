@@ -12,7 +12,7 @@ namespace Enemy.State
         public override void EnemyEnteringState()
         {
             base.EnemyEnteringState();
-            print("Enemy Entering patrolling state");
+            //print("Enemy Entering patrolling state");
             enemyView.ColorChange(EnemyColor.SILVER);
         }
 
@@ -24,7 +24,7 @@ namespace Enemy.State
         public override void EnemyExitingState()
         {
             base.EnemyExitingState();
-            print("Enemy Exiting patrolling state");
+            //print("Enemy Exiting patrolling state");
             enemyView.EnemyStop();
         }
 

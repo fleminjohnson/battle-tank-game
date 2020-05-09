@@ -6,8 +6,10 @@ namespace Enemy
 {
     public class EnemyModel
     {
+        private float totalHealth;
         public EnemyModel(int health, float force, float torque, BulletVariants bulletVariants, EnemyColor tankColor, ID iD)
         {
+            totalHealth = health;
             Health = health;
             Force = force;
             Torque = torque;
@@ -24,9 +26,10 @@ namespace Enemy
         public EnemyColor TankColor { get; }
         public ID ID { get; }
 
-        public void DecrementHealth(int decrementValue)
+        public float DecrementHealth(int decrementValue)
         {
             Health -= decrementValue;
+            return (300 / totalHealth);
         }
     }
 }

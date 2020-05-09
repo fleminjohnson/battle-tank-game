@@ -27,11 +27,17 @@ namespace Enemy
         private bool firstTime = true;
         private bool spanningOver = false;
 
+        [SerializeField]
+        private Transform HealthBarContainer;
+        private Transform HealthBar;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             target1 = EnemyService.Instance.spawnTransform1;
             target2 = EnemyService.Instance.spawnTransform2;
+
+            HealthBar = HealthBarContainer.transform.GetChild(0);
         }
         private void Start()
         {
@@ -175,9 +181,10 @@ namespace Enemy
             enemyController.ShootEventInit();
         }
 
-        public void StartGame()
+        public void EnemyHealthBarUpdate(float percentage)
         {
-            throw new NotImplementedException();
+            HealthBar.localPosition = HealthBar.localPosition + Vector3.left * percentage;
+            print(HealthBar.localPosition);
         }
     }
 }

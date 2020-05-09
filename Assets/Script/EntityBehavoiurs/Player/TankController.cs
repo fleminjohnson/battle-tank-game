@@ -46,7 +46,7 @@ namespace Player
                 TankView.DestroyTank();
                 TankService.Instance.TankDestroyed(position);
             }
-            TankModel.DecrementHealth(damage);
+            TankView.HealthBarUpdate(TankModel.DecrementHealth(damage));
         }
     }
 }

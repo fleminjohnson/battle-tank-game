@@ -10,13 +10,13 @@ public class EnemyAttackState : EnemyState
     public override void EnemyEnteringState()
     {
         base.EnemyEnteringState();
-        print("Attack Mode activated");
+        //print("Attack Mode activated");
     }
 
     public override void EnemyExitingState()
     {
         base.EnemyExitingState();
-        print("Attack Mode Deactivated");
+        //print("Attack Mode Deactivated");
     }
 
     private void Update()
