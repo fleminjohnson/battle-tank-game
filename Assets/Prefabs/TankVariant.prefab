@@ -54,6 +54,7 @@ MonoBehaviour:
   chasingingState: {fileID: 8854928835234194314}
   initialState: {fileID: 1274043026968653936}
   HealthBarContainer: {fileID: 6517894063614622175}
+  offset: {x: -41.09, y: 0, z: -24.33}
 --- !u!114 &1274043026968653936
 MonoBehaviour:
   m_ObjectHideFlags: 0

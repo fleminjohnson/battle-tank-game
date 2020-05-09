@@ -8,12 +8,14 @@ namespace Enemy
     public class EnemyController
     {
         private static float DeathCount = 0;
+        private bool firstTime = true;
         public EnemyController(EnemyView enemyView, EnemyModel enemyModel, EnemyColor enemyColor)
         {
             enemyView.ControllerChannelInitialisaton(this);
             EnemyView = enemyView;
             EnemyModel = enemyModel;
             EnemyView.ColorChange(enemyColor);
+            EnemyView.RandomSpawning();
         }
 
         public EnemyView EnemyView { get; }
@@ -39,6 +41,11 @@ namespace Enemy
                 EnemyService.Instance.EnemyDestroyed(position);
             }
             EnemyView.EnemyHealthBarUpdate(EnemyModel.DecrementHealth(damage));
+            if (firstTime)
+            {
+                EventServices.GenericInstance.InvokeEnemyHit();
+                firstTime = false;
+            }
         }
 
         public void ShootEventInit()

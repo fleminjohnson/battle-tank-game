@@ -31,6 +31,10 @@ namespace Player
         private Rigidbody rb;
         private Material selfMat;    
         private TankState currentState;
+        private Transform CameraPos;
+        [SerializeField]
+        private Vector3 offset;
+
 
         private void Awake()
         {
@@ -45,6 +49,7 @@ namespace Player
         {
             enemyTurretPosition = turretPosition;
             ChangeState(GetComponent<TankPatrolling>());
+            CameraPos = Camera.main.transform;
 
         }
         private void Update()
@@ -54,6 +59,8 @@ namespace Player
                 tankController.ShootEventInit();
             }
             tankController.MovementDirector();
+            CameraPos.position = new Vector3(transform.position.x + offset.x,
+                                   CameraPos.position.y, transform.position.z + offset.z);
         }
         public void ColorSelector(TankColor color)
         {

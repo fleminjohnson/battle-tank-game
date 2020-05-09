@@ -22,11 +22,11 @@ public class TankModel
     public BulletVariants BulletVariants { get; }
     public ID ID { get; }
 
+    public static int BulletCount;
+
     internal float DecrementHealth(int decrementValue)
     {
         Health -= decrementValue;
-        Debug.Log("Health is " + Health);
-        Debug.Log("Totalhealth is " + totalHealth);
         return (300/totalHealth);
     }
 }

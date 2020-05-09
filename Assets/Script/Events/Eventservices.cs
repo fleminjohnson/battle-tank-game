@@ -10,6 +10,9 @@ public class EventServices : SingletonGeneric<EventServices>
     public event Action<ID, ID> OnDeath;
     public event Action OnHundredBulletsFired;
     public event Action OnTenEnemyKills;
+    public event Action<int> OnGameOver;
+    public event Action OnRespawn;
+    public event Action OnEnemyHit;
 
     public void InvokeOnplayerDeath()
     {
@@ -29,5 +32,20 @@ public class EventServices : SingletonGeneric<EventServices>
     public void InvokeEnemyDeath()
     {
         OnEnemyDeath?.Invoke();
+    }
+
+    public void InvokeOnGameOver(int bulletCount)
+    {
+        OnGameOver?.Invoke(bulletCount);
+    }
+
+    public void InvokeOnRespawn()
+    {
+        OnRespawn?.Invoke();
+    }
+
+    public void InvokeEnemyHit()
+    {
+        OnEnemyHit?.Invoke();
     }
 }

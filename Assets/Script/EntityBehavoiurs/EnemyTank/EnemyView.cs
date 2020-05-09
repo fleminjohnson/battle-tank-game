@@ -103,6 +103,14 @@ namespace Enemy
             return enemyController.EnemyModel.ID;   
         }
 
+        public void RandomSpawning()
+        {
+            Vector3 pos = transform.position;
+            float xPos;
+            xPos = UnityEngine.Random.Range(-15f, 15f);
+            transform.position = new Vector3(xPos, pos.y, pos.z);
+        }
+
         public void EnemyPatrolling()
         {
             if (firstTime)
