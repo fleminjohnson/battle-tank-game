@@ -8,6 +8,7 @@ namespace Player
 {
     public class TankController
     {
+        private float bulletCount = 0;
         public TankController(TankModel tankModel, TankView tankView)
 
         {
@@ -25,6 +26,12 @@ namespace Player
         public void ShootEventInit()
         {
             TankService.Instance.BulletRequest(TankView.enemyTurretPosition, BulletVariants);
+            bulletCount += 1;
+            if(bulletCount == 100)
+            {
+                EventServices.GenericInstance.InvokeOnHundredBulletsFired();
+                bulletCount = 0;
+            }
         }
 
         public TankModel TankModel { get; }

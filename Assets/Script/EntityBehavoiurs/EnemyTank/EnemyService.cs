@@ -11,10 +11,11 @@ namespace Enemy
     public class EnemyService : SingletonBehaviour<EnemyService>, IServices
     {
         public EnemyView enemyViewPrefab;
-        private EnemyScriptableObject enemyConfig;
         public EnemyListScriptableObject enemyList;
         public Transform spawnTransform1;
         public Transform spawnTransform2;
+
+        private EnemyScriptableObject enemyConfig;
 
         private void Update()
         {
@@ -37,7 +38,7 @@ namespace Enemy
                                                   enemyConfig.force,
                                                   enemyConfig.torque,
                                                   enemyConfig.bulletVariants,
-                                                  enemyConfig.enemyColor, ID.ENEMY);
+                                                  enemyConfig.enemyColor,ID.ENEMY);
             EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
         }
 

@@ -56,7 +56,8 @@ namespace Player
 
         public void TankDestroyed(Vector3 position)
         {
-            ParticleServices.Instance.InitializeSmoke(position, this);      
+            ParticleServices.Instance.InitializeSmoke(position, this);
+            EventServices.GenericInstance.InvokeOnplayerDeath();
         }
 
         public void RespawnRequest()

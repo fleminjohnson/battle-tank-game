@@ -7,6 +7,7 @@ namespace Enemy
 {
     public class EnemyController
     {
+        private static float DeathCount = 0;
         public EnemyController(EnemyView enemyView, EnemyModel enemyModel, EnemyColor enemyColor)
         {
             enemyView.ControllerChannelInitialisaton(this);
@@ -28,6 +29,13 @@ namespace Enemy
             if(EnemyModel.Health - damage < 0)
             {
                 EnemyView.Death();
+                DeathCount += 1;
+                EventServices.GenericInstance.InvokeEnemyDeath();
+                if (DeathCount == 10)
+                {
+                    EventServices.GenericInstance.InvokeOnTenEnemyKills();
+                    DeathCount = 0;
+                }
                 EnemyService.Instance.EnemyDestroyed(position);
             }
             EnemyModel.DecrementHealth(damage) ;
