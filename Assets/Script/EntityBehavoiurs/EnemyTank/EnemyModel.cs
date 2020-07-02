@@ -6,7 +6,7 @@ namespace Enemy
 {
     public class EnemyModel
     {
-        private float totalHealth;
+        private int totalHealth;
         public EnemyModel(int health, float force, float torque, BulletVariants bulletVariants, EnemyColor tankColor, ID iD)
         {
             totalHealth = health;
@@ -30,6 +30,11 @@ namespace Enemy
         {
             Health -= decrementValue;
             return (300 / totalHealth);
+        }
+
+        public void ResetHealth()
+        {
+            Health = totalHealth;
         }
     }
 }

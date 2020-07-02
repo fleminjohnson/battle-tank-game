@@ -11,12 +11,12 @@ public class TankChasing : TankState
     {
         base.OnEnterState();
         tankView.ColorSelector(anotherVariant);
-        print("Entering chasing State");
+        //print("Entering chasing State");
     }
 
     public override void OnExitState()
     {
         base.OnExitState();
-        print("Exiting chasing State");
+        //print("Exiting chasing State");
     }
 }

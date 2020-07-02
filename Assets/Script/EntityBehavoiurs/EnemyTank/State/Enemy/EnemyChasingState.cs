@@ -10,7 +10,7 @@ namespace Enemy.State
         public override void EnemyEnteringState()
         {
             base.EnemyEnteringState();
-            print("Enemy Entering Chasing State");
+            //print("Enemy Entering Chasing State");
             enemyView.ColorChange(EnemyColor.GOLDEN);
         }
 
@@ -24,9 +24,12 @@ namespace Enemy.State
                     enemyView.EnemyTranslation(this.transform, player.transform);
                 }
             }
-            if(Vector3.Distance(player.transform.position, transform.position) < 10)
+            if(player != null)
             {
-                enemyView.ChangeState(enemyView.attackState);
+                if (Vector3.Distance(player.transform.position, transform.position) < 10)
+                {
+                    enemyView.ChangeState(enemyView.attackState);
+                }
             }
         }
 

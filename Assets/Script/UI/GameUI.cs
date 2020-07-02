@@ -33,6 +33,7 @@ public class GameUI : SingletonBehaviour<GameUI>
         EventServices.GenericInstance.OnRespawn += UpdateRespawnCount;
         EventServices.GenericInstance.OnEnemyHit += EnemyHit;
         NotificationBar.gameObject.SetActive(false);
+        ShowNotification("Battle Begin");
     }
 
     private void EnemyHit()
@@ -55,9 +56,10 @@ public class GameUI : SingletonBehaviour<GameUI>
 
     private void SaveData(int bulletCount)
     {
-        PlayerPrefs.SetInt("BulletCount", bulletCount);
-        PlayerPrefs.SetInt("KillCount", killCount);
-        PlayerPrefs.SetInt("EnemyHit", enemyHit);
+        PlayerPrefs.SetInt("BulletCount", bulletCount +
+        PlayerPrefs.GetInt("BulletCount", 0));
+        PlayerPrefs.SetInt("KillCount", killCount + PlayerPrefs.GetInt("KillCount", 0 ));
+        PlayerPrefs.SetInt("EnemyHit", enemyHit + PlayerPrefs.GetInt("EnemyHit", 0));
     }
 
     private void EnemyKilled()

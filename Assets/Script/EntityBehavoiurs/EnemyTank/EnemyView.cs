@@ -59,7 +59,15 @@ namespace Enemy
 
         public void Death()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+
+        public void Respawn()
+        {
+            print("Player respawned");
+            gameObject.SetActive(true);
+            transform.localScale = transform.localScale * 0.75f;
+            HealthBar.localPosition = Vector3.zero;
         }
 
         public void ColorChange(EnemyColor tankColor)
@@ -155,7 +163,8 @@ namespace Enemy
             // The step size is equal to speed times frame time.
             float singleStep = 1 * Time.deltaTime;
 
-            Vector3 newDirection = Vector3.RotateTowards(origin.transform.forward, targetDirection, singleStep, 0.0f);
+            Vector3 newDirection = Vector3.RotateTowards(origin.transform.forward, targetDirection, 
+                                                          singleStep * enemyController.EnemyModel.Torque, 0.0f);
             float angle = Vector3.Angle(origin.transform.forward, newDirection);
             this.angle = angle;
             // Calculate a rotation a step closer to the target and applies rotation to this object
@@ -173,7 +182,7 @@ namespace Enemy
 
         public bool EnemyTranslation(Transform origin, Transform destination)
         {
-            origin.transform.position = Vector3.MoveTowards(origin.position,destination.position, 3 * Time.deltaTime);
+            origin.transform.position = Vector3.MoveTowards(origin.position,destination.position, enemyController.EnemyModel.Force * Time.deltaTime);
             if (Vector3.Distance(origin.position, destination.position) < 5)
             {
                 return true;
@@ -192,7 +201,6 @@ namespace Enemy
         public void EnemyHealthBarUpdate(float percentage)
         {
             HealthBar.localPosition = HealthBar.localPosition + Vector3.left * percentage;
-            print(HealthBar.localPosition);
         }
     }
 }

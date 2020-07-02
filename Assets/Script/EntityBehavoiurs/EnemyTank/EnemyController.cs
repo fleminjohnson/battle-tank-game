@@ -21,11 +21,6 @@ namespace Enemy
         public EnemyView EnemyView { get; }
         public EnemyModel EnemyModel { get; private set; }
 
-        //public void CollisionOccured()
-        //{
-        //    EnemyView.Death();
-        //}
-
         public void Damage(int damage, Vector3 position)
         {
             if(EnemyModel.Health - damage < 0)
@@ -38,7 +33,7 @@ namespace Enemy
                     EventServices.GenericInstance.InvokeOnTenEnemyKills();
                     DeathCount = 0;
                 }
-                EnemyService.Instance.EnemyDestroyed(position);
+                EnemyService.Instance.EnemyDestroyed(position,this);
             }
             EnemyView.EnemyHealthBarUpdate(EnemyModel.DecrementHealth(damage));
             if (firstTime)

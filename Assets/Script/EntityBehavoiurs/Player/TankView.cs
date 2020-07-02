@@ -150,7 +150,6 @@ namespace Player
         public void HealthBarUpdate(float percentage)
         {
             HealthBar.localPosition = HealthBar.localPosition + Vector3.left * percentage;
-            print(HealthBar.localPosition);
         }
     }
 }

@@ -13,6 +13,7 @@ public class EventServices : SingletonGeneric<EventServices>
     public event Action<int> OnGameOver;
     public event Action OnRespawn;
     public event Action OnEnemyHit;
+    public event Action OnMute;
 
     public void InvokeOnplayerDeath()
     {
@@ -47,5 +48,10 @@ public class EventServices : SingletonGeneric<EventServices>
     public void InvokeEnemyHit()
     {
         OnEnemyHit?.Invoke();
+    }
+
+    public void InvokeMute()
+    {
+        //OnMute?.Invoke();
     }
 }

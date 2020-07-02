@@ -35,7 +35,6 @@ namespace Player
         {
             PlayerInstantiate(tankConfigurations[2]);
             playerCount += 1;
-            print(playerCount);
         }
 
         public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
@@ -53,9 +52,7 @@ namespace Player
                                                 tankScriptableObject.bulletVariants, ID.PLAYER);
 
             tankView = GameObject.Instantiate<TankView>(tankViewPrefab);
-
             EnemyState.player = tankView;
-
             tankView.ColorSelector(tankScriptableObject.tankColor);
             TankController tankController = new TankController(tankModel, tankView);
         }

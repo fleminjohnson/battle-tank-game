@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5787061008830a9448652299f2f2b6b8, type: 3}
   m_Name: StrongTank
   m_EditorClassIdentifier: 
-  health: 100
+  health: 500
   force: 10
-  torque: 5
+  torque: 3
   bulletVariants: 3
   tankColor: 1

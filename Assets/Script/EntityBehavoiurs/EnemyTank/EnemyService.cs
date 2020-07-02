@@ -11,40 +11,44 @@ namespace Enemy
     public class EnemyService : SingletonBehaviour<EnemyService>, IServices
     {
         public EnemyView enemyViewPrefab;
-        public EnemyListScriptableObject enemyList;
         public Transform spawnTransform1;
         public Transform spawnTransform2;
+        public EnemyScriptableObject enemyScriptableObject;
+        private EnemyPooling enemyPooling;
 
-        private EnemyScriptableObject enemyConfig;
-
-        private void Update()
+        void Start()
         {
-            StartGame();
-        }
+            enemyPooling = GetComponent<EnemyPooling>();
 
-        private void StartGame()
-        {
-            enemyConfig = enemyList.enemy[UnityEngine.Random.Range(0,enemyList.enemy.Length)];
-            if (Input.GetKeyDown(KeyCode.Space))
+            for(int i = 0; i < 5; i++) 
             {
-                CreateEnemy();
+                CreateEnemy(enemyScriptableObject);
             }
         }
 
-        private void CreateEnemy()
+        private EnemyController CreateEnemy(EnemyScriptableObject enemyConfig)
         {
-            EnemyView enemyViewInstance = GameObject.Instantiate<EnemyView>(enemyViewPrefab);
             EnemyModel enemyModel = new EnemyModel(enemyConfig.health,
-                                                  enemyConfig.force,
-                                                  enemyConfig.torque,
-                                                  enemyConfig.bulletVariants,
-                                                  enemyConfig.enemyColor,ID.ENEMY);
-            EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
+                                                    enemyConfig.force,
+                                                    enemyConfig.torque,
+                                                    enemyConfig.bulletVariants,
+                                                    enemyConfig.enemyColor,ID.ENEMY);
+            //EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
+            EnemyController enemyController = enemyPooling.GetEnemy(enemyViewPrefab, enemyModel);
+            return enemyController;
         }
 
-        public void EnemyDestroyed(Vector3 position)
+        private void RespawnEnemy(EnemyScriptableObject enemyConfig)
+        {
+            EnemyController enemyController = CreateEnemy(enemyConfig);
+            enemyController.EnemyView.Respawn();
+            enemyController.EnemyModel.ResetHealth();
+        }
+
+        public void EnemyDestroyed(Vector3 position, EnemyController enemyController)
         {
             ParticleServices.Instance.InitializeSmoke(position,this);
+            enemyPooling.ReturnItem(enemyController);
         }
 
         public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
@@ -54,7 +58,8 @@ namespace Enemy
 
         public void RespawnRequest()
         {
-            CreateEnemy();
+            print("Player respawn request made");
+            RespawnEnemy(enemyScriptableObject);
         }
     }
 }
