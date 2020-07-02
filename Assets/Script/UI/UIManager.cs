@@ -22,6 +22,10 @@ public class UIManager : SingletonBehaviour<UIManager>
     private TMP_Text killCountText;
     [SerializeField]
     private TMP_Text enemyHitText;
+    [SerializeField]
+    private Slider loadingBar;
+    [SerializeField]
+    private Image mainLobby;
 
     private bool mute = false;
     private int bulletCount = 0;
@@ -39,12 +43,15 @@ public class UIManager : SingletonBehaviour<UIManager>
 
     void Start()
     {
+        mainLobby.gameObject.SetActive(true);
         bulletCountText.text = bulletCount.ToString();
         killCountText.text   = killCount.ToString();
         enemyHitText.text    = enemyHit.ToString();
         muteButton.isOn      = false;
         leftPanel.gameObject.SetActive(false);
         profilePanel.SetActive(false);
+        loadingBar.gameObject.SetActive(false);
+        loadingBar.gameObject.SetActive(true);
     }
 
     private void PanelFunction()
@@ -80,12 +87,20 @@ public class UIManager : SingletonBehaviour<UIManager>
 
     public void Play()
     {
-        // StartCoroutine(SceneLoading());
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+
+        mainLobby.gameObject.SetActive(false);
+        StartCoroutine(SceneLoading(1));
     }
 
-    IEnumerator SceneLoading()
+    IEnumerator SceneLoading(int sceneIndex)
     {
-        yield return new WaitForEndOfFrame();
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        while (!operation.isDone)
+        {
+            float loadingValue = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingBar.value = loadingValue;
+            print(loadingValue);
+            yield return null;
+        }
     }
 }
