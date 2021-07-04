@@ -12,10 +12,3 @@ public class EnemyScriptableObject : ScriptableObject
     public BulletVariants bulletVariants;
     public EnemyColor enemyColor;
 }
-
-[CreateAssetMenu(fileName = "EnemyScriptableObject", menuName = "ScriptableObject/NewEnemyList")]
-
-public class EnemyListScriptableObject : ScriptableObject
-{
-    public EnemyScriptableObject[] enemy;
-}
