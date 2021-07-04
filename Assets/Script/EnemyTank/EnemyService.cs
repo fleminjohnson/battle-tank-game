@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bullet;
+using Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +12,8 @@ namespace Enemy
         public EnemyView enemyViewPrefab;
         private EnemyScriptableObject enemyConfig;
         public EnemyListScriptableObject enemyList;
-        public Material[] materialName;
+        public Transform spawnTransform1;
+        public Transform spawnTransform2;
 
         private void Update()
         {
@@ -19,7 +22,7 @@ namespace Enemy
 
         private void StartGame()
         {
-            enemyConfig = enemyList.enemy[UnityEngine.Random.Range(0, enemyList.enemy.Length)];
+            enemyConfig = enemyList.enemy[UnityEngine.Random.Range(0,enemyList.enemy.Length)];
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 CreateEnemy();
@@ -33,30 +36,13 @@ namespace Enemy
                                                   enemyConfig.force,
                                                   enemyConfig.torque,
                                                   enemyConfig.bulletVariants,
-                                                  enemyConfig.enemyColor);
-            ApplyMaterial(enemyConfig.enemyColor, enemyViewInstance);
-            EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel);
+                                                  enemyConfig.enemyColor, ID.ENEMY);
+            EnemyController enemyController = new EnemyController(enemyViewInstance, enemyModel, enemyConfig.enemyColor);
         }
 
-        private void ApplyMaterial(EnemyColor tankColor, EnemyView enemyView)
+        public void BulletRequest(Transform turretPosition, BulletVariants bulletVariants)
         {
-            Material material = null;
-            switch (tankColor)
-            {
-                case EnemyColor.GOLDEN:
-                    material = materialName[0];
-                    break;
-                case EnemyColor.SILVER:
-                    material = materialName[1];
-                    break;
-                case EnemyColor.YELLOW:
-                    material = materialName[2];
-                    break;
-            }
-            for (int i = 0; i < enemyView.transform.GetChild(0).childCount; i++)
-            {
-                enemyView.transform.GetChild(0).GetChild(i).GetComponent<MeshRenderer>().material = material;
-            }
+            BulletService.Instance.CreateBullet(turretPosition, bulletVariants, ID.ENEMY);
         }
     }
 }

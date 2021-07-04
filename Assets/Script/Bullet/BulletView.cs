@@ -18,7 +18,7 @@ namespace Bullet
         // Update is called once per frame
         void Start()
         {
-            bulletcontroller.ControllerInitialization();
+            bulletcontroller.FireCommand();
             //Fire(5.0f);
         }
 
@@ -32,9 +32,19 @@ namespace Bullet
             bulletcontroller = bulletControl;
         }
 
-        private void OnCollisionStay(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.GetComponent<TankView>() == null)
+            IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                print("This is IDamagable ");
+                if(bulletcontroller.BulletModel.ID != damagable.ReturnID())
+                {
+                    damagable.GetDamage((int)bulletcontroller.BulletModel.BulletDamage);
+                    Destroy(gameObject);
+                }
+            }
+            else
             {
                 Destroy(gameObject);
             }

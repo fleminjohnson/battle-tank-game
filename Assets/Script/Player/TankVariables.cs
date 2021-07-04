@@ -22,3 +22,9 @@ public enum BulletVariants
     MEDIUM = 2,
     STRONG = 3
 }
+
+public enum ID
+{
+    PLAYER = 1,
+    ENEMY =2
+}

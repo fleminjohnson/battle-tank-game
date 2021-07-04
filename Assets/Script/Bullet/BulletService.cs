@@ -9,24 +9,18 @@ namespace Bullet
     {
         public BulletView bulletView;
         public BulletScriptableObject[] bulletScriptableObject;
-        public BulletController CreateBullet(Transform position, BulletVariants bulletVariants)
+        private BulletModel bulletModel = null;
+        public BulletController CreateBullet(Transform transform, BulletVariants bulletVariants, ID iD)
         {
-            BulletModel bulletModel = new BulletModel(bulletScriptableObject[0], position);
-            switch (bulletVariants)
+            for (int i = 0; i < bulletScriptableObject.Length; i++)
             {
-                case BulletVariants.WEAK:
-                    bulletModel = new BulletModel(bulletScriptableObject[0], position);
-                    break;
-                case BulletVariants.MEDIUM:
-                    bulletModel = new BulletModel(bulletScriptableObject[1], position);
-                    break;
-                case BulletVariants.STRONG:
-                    bulletModel = new BulletModel(bulletScriptableObject[2], position);
-                    break;
+                if (bulletScriptableObject[i].bulletVariants == bulletVariants)
+                {
+                    bulletModel = new BulletModel(bulletScriptableObject[i], transform, iD);
+                }
             }
             BulletController bulletController = new BulletController(bulletModel, bulletView);
             return bulletController;
         }
     }
-
 }

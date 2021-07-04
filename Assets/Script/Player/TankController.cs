@@ -24,7 +24,7 @@ namespace Player
 
         public void ShootEventInit()
         {
-            TankService.Instance.BulletRequest(TankView.TurretPosition, BulletVariants);
+            TankService.Instance.BulletRequest(TankView.enemyTurretPosition, BulletVariants);
         }
 
         public TankModel TankModel { get; }

@@ -8,4 +8,5 @@ public class BulletScriptableObject : ScriptableObject
 {
     public float bulletSpeed;
     public float bulletDamage;
+    public BulletVariants bulletVariants;
 }
